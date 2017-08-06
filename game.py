@@ -161,8 +161,8 @@ if __name__ == "__main__":
         row = -1
         col = -1
         attempts = 0
-        while row < 1 or row > board.size + 1 or \
-              col < 1 or col > board.size + 1 or \
+        while row < 0 or row > board.size or \
+              col < 0 or col > board.size or \
               not board.is_empty(row, col):
             if attempts > 0:
                 print('That is not a valid move, look at the board again')
@@ -170,8 +170,9 @@ if __name__ == "__main__":
             try:
                 val = input()
                 row, col = (int(elem) - 1 for elem in val.strip().split(' '))
+                print(row, col)
             except:
-                if val.lower().strip() == 'q':
+                if val.strip().lower() == 'q':
                     sys.exit()
             attempts += 1
         return TicTacToe.make_move(player, row, col)
@@ -179,4 +180,4 @@ if __name__ == "__main__":
     print('playing game')
     
     game = TicTacToe()
-    print(game.play_game(random_player, human_player), "has won the game")
+    print(game.play_game(random_player, human_player, log = False), "has won the game")
