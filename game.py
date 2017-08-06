@@ -142,40 +142,41 @@ class TicTacToe:
         
         return ended
 
+    
+def random_player(board, player):
+    sel = random.choice([(row, col) for row in range(board.size) 
+                                    for col in range(board.size)
+                         if board.is_empty(row, col)])
+    
+    return TicTacToe.make_move(player, sel[0], sel[1])
+
+def human_player(board, player):
+    board.print_board()
+    print('Type \'q\' to quit')
+    print('You are "' + player + '"')
+    print('Type location of play as \'row col\'')
+    print('(Rows and columns start at 1)')
+    row = -1
+    col = -1
+    attempts = 0
+    while row < 0 or row > board.size or \
+          col < 0 or col > board.size or \
+          not board.is_empty(row, col):
+        if attempts > 0:
+            print('That is not a valid move, look at the board again')
+            board.print_board()
+        try:
+            val = input()
+            row, col = (int(elem) - 1 for elem in val.strip().split(' '))
+            print(row, col)
+        except:
+            if val.strip().lower() == 'q':
+                sys.exit()
+        attempts += 1
+    return TicTacToe.make_move(player, row, col)
+    
 if __name__ == "__main__":
     #Play test game of tic tac toe
-    
-    def random_player(board, player):
-        sel = random.choice([(row, col) for row in range(board.size) 
-                                        for col in range(board.size)
-                             if board.is_empty(row, col)])
-        
-        return TicTacToe.make_move(player, sel[0], sel[1])
-    
-    def human_player(board, player):
-        board.print_board()
-        print('Type \'q\' to quit')
-        print('You are "' + player + '"')
-        print('Type location of play as \'row col\'')
-        print('(Rows and columns start at 1)')
-        row = -1
-        col = -1
-        attempts = 0
-        while row < 0 or row > board.size or \
-              col < 0 or col > board.size or \
-              not board.is_empty(row, col):
-            if attempts > 0:
-                print('That is not a valid move, look at the board again')
-                board.print_board()
-            try:
-                val = input()
-                row, col = (int(elem) - 1 for elem in val.strip().split(' '))
-                print(row, col)
-            except:
-                if val.strip().lower() == 'q':
-                    sys.exit()
-            attempts += 1
-        return TicTacToe.make_move(player, row, col)
     
     print('playing game')
     
