@@ -128,8 +128,8 @@ class TicTacToe:
             move = players[curr](self, pieces[curr])
             
             if not self.is_valid(move):
-                print(move)
-                return other(curr)
+                #print(move)
+                return pieces[other(curr)]
             
             self.apply_move(move)
             
@@ -168,7 +168,7 @@ def human_player(board, player):
         try:
             val = input()
             row, col = (int(elem) - 1 for elem in val.strip().split(' '))
-            print(row, col)
+            #print(row, col)
         except:
             if val.strip().lower() == 'q':
                 sys.exit()
