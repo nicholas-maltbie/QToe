@@ -105,7 +105,7 @@ class TicTacToe:
         print()
     
     def play_game(self, player_1, player_2, 
-        player_1_piece = 'x', player_2_piece = 'y', 
+        player_1_piece = 'X', player_2_piece = 'O', 
         random_start = True, log = True):
         """Plays a game with two players, each 'player' is a definition for a 
         function that when passed a board and player piece as arguments will 
